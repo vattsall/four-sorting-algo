@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithms Showcase</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #0f172a, #111827);
+            color: #e5e7eb;
+        }
+
+        header {
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        header p {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: #9ca3af;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #a5b4fc;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 30px auto 40px;
+            padding: 0 20px;
+        }
+
+        .intro-card {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 14px;
+            padding: 20px 22px;
+            border: 1px solid #4b5563;
+            margin-bottom: 25px;
+        }
+
+        .intro-card h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #e5e7eb;
+        }
+
+        .intro-highlight {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            background: #1d4ed8;
+            color: #e5e7eb;
+            margin-right: 6px;
+        }
+
+        .algorithms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        section.algorithm {
+            background: #020617;
+            border-radius: 14px;
+            padding: 18px 18px 20px;
+            border: 1px solid #374151;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .algorithm h2 {
+            margin: 0;
+            font-size: 1.15rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #e5e7eb;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            border: 1px solid #4b5563;
+            color: #9ca3af;
+        }
+
+        .algorithm p {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            margin: 0;
+        }
+
+        .complexity {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            border-top: 1px dashed #4b5563;
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+
+        pre {
+            margin: 0;
+            background: #020617;
+            border-radius: 10px;
+            padding: 10px 12px;
+            overflow-x: auto;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.78rem;
+            border: 1px solid #1f2937;
+        }
+
+        code {
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .code-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-bottom: 4px;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            padding: 16px 10px;
+            font-weight: bold;
+
+            /* SFSU branding */
+            background-color: #2E0854; /* SFSU Purple */
+            color: #FDB515;           /* SFSU Gold */
+        }
+
+        footer small {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.4rem;
+            }
+            main {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="tagline">CS 317 · Visual Guide</div>
+    <h1>Basic Sorting Algorithms</h1>
+    <p>Compare four classic sorting strategies with their JavaScript implementations.</p>
+</header>
+
+<main>
+    <div class="intro-card">
+        <h2>
+            <span class="intro-highlight">Overview</span>
+            Sorting at a glance
+        </h2>
+        <p>
+            This page presents four fundamental sorting algorithms implemented in JavaScript:
+            <strong>Insertion Sort</strong>, <strong>Selection Sort</strong>,
+            <strong>Merge Sort</strong>, and <strong>Quick Sort</strong>.
+            Each card gives you a short description, typical use case, and the full code.
+        </p>
+    </div>
+
+    <div class="algorithms-grid">
+
+        <!-- Insertion Sort -->
+        <section class="algorithm">
+            <h2>
+                Insertion Sort
+                <span class="badge">Simple · In-place</span>
+            </h2>
+            <p>
+                Insertion sort builds the sorted array one item at a time.
+                It works similarly to how you sort playing cards in your hand,
+                inserting each new card into its correct position.
+            </p>
+            <div class="complexity">
+                <strong>Time:</strong> O(n²) in average and worst case ·
+                <strong>Space:</strong> O(1)
+            </div>
+            <div class="code-label">JavaScript implementation</div>
+            <pre><code>
+// Insertion Sort Implementation
+function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let key = arr[i];
+        let j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+    return arr;
+}
+            </code></pre>
+        </section>
+
+        <!-- Selection Sort -->
+        <section class="algorithm">
+            <h2>
+                Selection Sort
+                <span class="badge">Simple · In-place</span>
+            </h2>
+            <p>
+                Selection sort repeatedly finds the smallest element from the unsorted
+                portion of the array and moves it to the end of the sorted portion.
+                It is conceptually simple but not very efficient on large datasets.
+            </p>
+            <div class="complexity">
+                <strong>Time:</strong> O(n²) in all cases ·
+                <strong>Space:</strong> O(1)
+            </div>
+            <div class="code-label">JavaScript implementation</div>
+            <pre><code>
+// Selection Sort Implementation
+function selectionSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+    }
+    return arr;
+}
+            </code></pre>
+        </section>
+
+        <!-- Merge Sort -->
+        <section class="algorithm">
+            <h2>
+                Merge Sort
+                <span class="badge">Divide &amp; Conquer</span>
+            </h2>
+            <p>
+                Merge sort splits the array into halves, recursively sorts each half,
+                and then merges the sorted halves back together. It offers
+                predictable performance and is stable, but uses extra memory.
+            </p>
+            <div class="complexity">
+                <strong>Time:</strong> O(n log n) in all cases ·
+                <strong>Space:</strong> O(n)
+            </div>
+            <div class="code-label">JavaScript implementation</div>
+            <pre><code>
+// Merge Sort Implementation
+function mergeSort(arr) {
+    if (arr.length <= 1) return arr;
+
+    const mid = Math.floor(arr.length / 2);
+    const left = mergeSort(arr.slice(0, mid));
+    const right = mergeSort(arr.slice(mid));
+
+    return merge(left, right);
+}
+
+function merge(left, right) {
+    let result = [];
+    let i = 0, j = 0;
+
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) {
+            result.push(left[i]);
+            i++;
+        } else {
+            result.push(right[j]);
+            j++;
+        }
+    }
+
+    return result.concat(left.slice(i)).concat(right.slice(j));
+}
+            </code></pre>
+        </section>
+
+        <!-- Quick Sort -->
+        <section class="algorithm">
+            <h2>
+                Quick Sort
+                <span class="badge">Divide &amp; Conquer</span>
+            </h2>
+            <p>
+                Quick sort chooses a pivot element, partitions the array into values
+                less than and greater than the pivot, and recursively sorts the partitions.
+                It is very fast in practice but can degrade in some worst-case scenarios.
+            </p>
+            <div class="complexity">
+                <strong>Time:</strong> O(n log n) average · O(n²) worst ·
+                <strong>Space:</strong> O(log n) (recursive stack)
+            </div>
+            <div class="code-label">JavaScript implementation</div>
+            <pre><code>
+// Quick Sort Implementation
+function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+
+    const pivot = arr[arr.length - 1];
+    const left = [];
+    const right = [];
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        if (arr[i] < pivot) {
+            left.push(arr[i]);
+        } else {
+            right.push(arr[i]);
+        }
+    }
+
+    return [...quickSort(left), pivot, ...quickSort(right)];
+}
+            </code></pre>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    © 2025 SF State University - Intro to Web Development
+    <small>Sorting Algorithms Reference Page</small>
+</footer>
+
+</body>
+</html>
